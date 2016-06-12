@@ -1,26 +1,26 @@
+\usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amsthm}
 \usepackage{appendix}
 \usepackage[urldate=iso8601,date=iso8601]{biblatex}
 \usepackage[yyyymmdd]{datetime}
-\usepackage[answerdelayed]{exercise}
+\usepackage{enumitem}
 \usepackage{listings}
+\usepackage{tabu}
 \usepackage{url}
 
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 
-\chapterstyle{bianchi}
+% \chapterstyle{section}
 \setlength{\parskip}{2ex}
 \renewcommand*{\dateseparator}{-}
-\crefname{Exercise}{exercise}{exercise}
-\Crefname{Exercise}{exercise}{Exercise}
 
 \newcommand{\monospace}[1]{{\small \path{#1}}}
 \newcommand{\btrurl}[1]{{\small \url{#1}}}
 \newcommand{\barelink}[1]{\monospace{<}\btrurl{#1}\monospace{>}}
-\newcommand{\link}[2]{#1 \barelink{#2}}
 \newcommand{\mdlink}[2]{\href{#2}{#1}}
+\newcommand{\link}[2]{\mdlink{#1 \barelink{#2}}{#2}}
 \newcommand{\anauthor}[2]{#1 \monospace{<{#2}>}}
 \newcommand{\xtb}{\textbf}
 \newcommand{\xti}{\emph}
@@ -54,19 +54,29 @@
 \newcommand{\goesto}{\leadsto}
 \newcommand{\limitis}{\leadsto}
 \newcommand{\answergraph}[1]{\includegraphics[width=0.8\textwidth]{#1}}
+\newcommand{\sem}{;\;}
+\newcommand{\parenref}[1]{(\cref{#1})}
+\newcommand{\Parenref}[1]{(\Cref{#1})}
+\newcommand{\namedexercise}[2]
+  {\begin{exercise}[#1]
+    #2
+  \end{exercise}}
 
-\newenvironment{alignmath}[1]
-  {\begin{eqn}\begin{tabu}{#1}}
-  {\end{tabu}\end{eqn}}
+\newenvironment{exerciselist}
+  {\subsection*{Exercises}}
+  {}
+\newenvironment{eqn}
+  {\begin{equation*}}
+  {\end{equation*}}
+% \newenvironment{alignmath}[1]
+%   {\begin{eqn}\begin{tabu}{#1}}
+%   {\end{tabu}\end{eqn}}
 \newenvironment{rclmath}
-  {\begin{eqnarray}}
-  {\end{eqnarray}}
+  {\begin{eqnarray*}}
+  {\end{eqnarray*}}
 \newenvironment{rcl}
   {\begin{rclmath}}
   {\end{rclmath}}
-\newenvironment{eqn}
-  {\begin{equation}}
-  {\end{equation}}
 % Named so that I don't accidentally select the wrong completion.
 \newenvironment{zz}
   {\begin{eqn}}
@@ -77,6 +87,8 @@
 \newtheorem{example}[definition]{Example}
 \newtheorem{remark}[definition]{Remark}
 \newtheorem{aside}[definition]{Aside}
+
+\newtheorem{exercise}{Exercise}[section]
 
 \theoremstyle{plain}
 \newtheorem{theorem}[definition]{Theorem}
@@ -97,12 +109,5 @@
 \setcounter{chapter}{-1}
 \input{chapters/0.tex}
 \input{chapters/1.tex}
-
-\begin{appendices}
-  \chapter{Solutions to some of the exercises}
-
-  \shipoutAnswer
-\end{appendices}
-
 \printbibliography
 \end{document}

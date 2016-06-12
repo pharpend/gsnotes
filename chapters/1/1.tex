@@ -1,8 +1,9 @@
 \section{Induction}
 
-There are 5 axioms, called the \term{Peano axioms}\footnote{``Peano''
-  is pronounced ``pay ahh no''.}, which we can use to define most
-properties of the natural numbers.
+There are five axioms, called the \term{Peano
+  axioms}\footnote{``Peano'' is pronounced ``pay ahh no''.}, which we
+can use to define most properties of the natural numbers. We'll be
+looking at the fifth axiom, called the ``inductive axiom''.
 
 \begin{aside}
   There are loads of textbooks that prove very basic properties of the
@@ -64,11 +65,13 @@ $n$.
   Some logic systems don't have the dichotomy of ``true'' or
   ``false'', also called the \term{law of excluded middle}, which
   makes my explanation of induction somewhat reductionist.  If you are
-  interested in the topic, check out \link{John Halleck's Logic
-    Systems}{http://www.cc.utah.edu/~nahaj/logic/structures/systems/index.html}. \cite{halleck}
+  interested in the topic, you can read \link{John Halleck's index of
+    logic
+    systems}{http://www.cc.utah.edu/~nahaj/logic/structures/index.html}. \cite{halleck}
 \end{aside}
 
 \begin{definition}[Well-ordering principle]
+  \label{def:well-ordering}
   Every non-empty subset of the natural numbers has a least element.
 \end{definition}
 
@@ -78,36 +81,224 @@ $n$.
 \end{remark}
 
 \begin{lemma}
-  The sum of the first $n$ positive integers is equal to $n^2$. That
-  is,
+  \label{thm:n-positive-ints}
+  The sum of the first $n$ odd positive integers is equal to
+  $n^2$. That is,
 
   \begin{zz}
-    n^2 = \sum_{i = 1}^n i
+    n^2 = \sum_{k = 1}^n 2k - 1
+  \end{zz}
+\end{lemma}
+
+\begin{proof}
+  We have a satisfactory number of base cases
+
+  \begin{rcl}
+    1^2 & = & 1 \\
+    2^2 & = & 1 + 3 \\
+    3^2 & = & 1 + 3 + 5 \\
+  \end{rcl}
+
+  For our inductive case, we have that $P(n - 1)$ holds.
+
+  \begin{rcl}
+    (n - 1)^2 & = & 1 + 3 + 5 + \dots + \brackets{2(n - 1) - 1} \\
+              & = & 1 + 3 + 5 + \dots + \parens{2n - 3} \\
+  \end{rcl}
+
+  We claim that 
+
+  \begin{rcl}
+    n^2 & = & 1 + 3 + 5 + \dots + \parens{2n - 1}
+  \end{rcl}
+
+  First note that this is equal to
+
+  \begin{rcl}
+    n^2 & = & \brackets{1 + 3 + 5 + \dots + \parens{2n - 3}} + \parens{2n - 1} \\
+        & = & \parens{n - 1}^2 + \parens{2n - 1} \\
+        & = & \parens{n^2 - 2n + 1} + \parens{2n - 1} \\
+        & = & n^2
+  \end{rcl}
+
+  QED.
+\end{proof}
+
+\begin{lemma}
+  For $x \in \R$, $x \ne 1$, and $n \in \N$
+
+  \begin{zz}
+    \frac{x^n - 1}{x - 1} = 1 + x + x^2 + \dots + x^{n - 1}
+  \end{zz}
+\end{lemma}
+
+\begin{proof}
+  In the base case, we have $\frac{x^1 - 1}{x - 1} = 1$.
+
+  In the inductive case, we assume, for all $1 < k \le n - 1$
+
+    \begin{zz}
+      \frac{x^k - 1}{x - 1} = \sum_{j = 0}^{k - 1} x^j
+    \end{zz}
+
+    We have
+
+    \begin{rcl}
+      \sum_{j = 0}^{n - 1} x^j & = & \sum_{j = 0}^{n - 2} x^j + x^{n - 1} \\
+                               & = & \frac{x^{n - 1} - 1}{x - 1} + \frac{x - 1}{x - 1}x^{n - 1} \\
+                               & = & \frac{x^{n - 1} - 1}{x - 1} + \frac{x^n - x^{n - 1}}{x - 1} \\
+                               & = & \frac{x^{n - 1} - 1}{x - 1} + \frac{x^n - x^{n - 1}}{x - 1} \\
+                               & = & \frac{x^n - 1}{x - 1} \\
+    \end{rcl}
+
+    QED.
+\end{proof}
+
+\begin{corollary}
+  If $a, b \in \N$, and $b \ge 2$, then $a < b^a$
+\end{corollary}
+\begin{proof}
+  Note that $a = 1 + 1 + \dots + 1$, where $1$ appears $a$ times.
+
+  We have that
+
+  \begin{zz}
+    1 + 1 + \dots + 1 < 1 + b + b^2 + \dots + b^{a - 1}
   \end{zz}
 
-  Let's define $S$ to be the set of all natural numbers for which
-  $P(n)$ does not hold.
-\end{lemma}
+  By the previous lemma, the right-hand side of that inequality is
+  $\frac{b^a - 1}{b - 1}$. We therefore have
+
+  \begin{zz}
+    \frac{b^a - 1}{b - 1} \le b^{a - 1} < b^a
+  \end{zz}
+
+  This implies $a < b^a$. QED.
+\end{proof}
 
 % -------------------------------------------------------------------- %
 \subsection*{Exercises}
 
-\begin{ExerciseList}
-  \Exercise{Prove that strong induction (\cref{def:strong-induction})
-    implies weak induction (\cref{def:weak-induction}).}
+\begin{exercise}
   \label{exc:strong-weak}
+  Prove that strong induction \parenref{def:strong-induction}
+  implies weak induction \parenref{def:weak-induction}.
+\end{exercise}
 
-  \Exercise{Using induction, prove that, for all natural numbers
-    $n > 2$, there are no integer solutions to
+\begin{exercise}
+  \label{exc:well-ordering}
+  Prove that the well-ordering
+  principle \parenref{def:well-ordering} is equivalent to
+  mathematical induction \parenref{def:strong-induction}.
+\end{exercise}
+
+\exercise{Prove \cref{thm:n-positive-ints} without induction.}
+
+\begin{exercise}
+  \label{exc:fermat}
+  Using induction, prove that, for all natural numbers $n > 2$,
+  there are no integer solutions to
+
+  \begin{zz}
+    x^n + y^n = z^n
+  \end{zz}
+\end{exercise}
+
+\subsubsection*{Aaron's Induction Exercises}
+
+\begin{exercise}
+  \label{aaron-induction-1}
+  Using induction, prove each of the following
+
+  \begin{enumerate}[label=(\alph*)]
+  \item For $n \ge 1$, the sum of the first $n$ positive integers is
+    equal to $\frac{n(n + 1)}{2}$. That is,
 
     \begin{zz}
-      x^n + y^n = z^n
+      1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2}
     \end{zz}
-  }
-  \label{exc:fermat}
+  \item For $n \ge 1$, sum of the first $n$ perfect squares is equal
+    to $\frac{n(n + 1)(2n + 1)}{6}$. That is,
 
-  \Exercise{Prove that the well-ordering principle
-    (\cref{def:well-ordering}) is equivalent to mathematical
-    induction.}
-  \label{exc:well-ordering}
-\end{ExerciseList}
+    \begin{zz}
+      1^2 + 2^2 + 3^2 + \dots + n^2 = \frac{n (n + 1)(2n + 1)}{6}
+    \end{zz}
+  \item Using induction, prove that for $n \ge 1$, the sum of the
+    first $n$ positive cubes is equal to the square of the sum of
+    the first $n$ positive integers. That is,
+
+    \begin{zz}
+      1^3 + 2^3 + 3^3 + \dots + n^3 = \parens{1 + 2 + 3 + \dots + n}^2
+    \end{zz}
+
+    Hint: use part (a).
+  \item Fix a real number $x \ge -1$. For any $n \ge 1$,
+
+    \begin{zz}
+      (1 + x)^n \ge 1 + nx
+    \end{zz}
+
+  \item For $n \ge 1$,
+
+    \begin{zz}
+      1(2) + 2(3) + 3(4) + \dots + n(n + 1) = \frac{n(n+1)(n+2)}{3}
+    \end{zz}
+  \item For $n \ge -1$, the integer $2n^3 + 7n$ is divisible by $3$.
+  \item For $n \ge 1$, the integer $n^2 + (n + 2)^2 + (n + 4)^2$ is
+    divisible by $12$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Compute the first several values of the following sequences, and
+  look for a pattern. Guess the formula for the $n$th term. Prove your
+  guess is correct using induction.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item $a_n = \sum_{k = 1}^n 2^{-k}$
+  \item $b_n = \sum_{k = 1}^n \frac{1}{k(k + 1)}$
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  The Fibonacci sequence $F_n$ is defined recursively by
+
+  \begin{rcl}
+    F_0 & = & 0 \\
+    F_1 & = & 1 \\
+    F_n & = & F_{n - 1} + F_{n - 2} \\
+  \end{rcl}
+
+  \begin{enumerate}[label=(\alph*)]
+  \item Calculate $F_n$ for $2 \le n \le 15$.
+  \end{enumerate}
+
+  Use induction to prove the following statements
+
+  \begin{enumerate}[label=(\alph*),start=2]
+  \item For $n \ge 0$,
+
+    \begin{zz}
+      F_1 + F_2 + F_3 + \dots + F_n = F_{n + 2} - 1
+    \end{zz}
+
+  \item For $n \ge 1$,
+
+    \begin{zz}
+      F_1 + F_3 + F_5 + \dots + F_{2n - 1} = F_{2n}
+    \end{zz}
+
+  \item for $n \ge 1$,
+
+    \begin{zz}
+      F_2 + F_4 + F_6 + \dots + F_{2n} = F_{2n + 1} - 1
+    \end{zz}
+
+  \item Use induction to prove that for $n \ge 0$,
+
+    \begin{zz}
+      \parens{F_{n + 1}}^2 - F_nF_{n + 2} = (-1)^n
+    \end{zz}
+    
+  \end{enumerate}
+\end{exercise}
