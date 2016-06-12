@@ -1,1 +1,312 @@
 \section{Division}
+
+In this section, we are going to derive an algorithm for division with
+a remainder, and then prove it's correct.
+
+\begin{definition}[Division algorithm]
+  Let $a, b \in \N$, with $a \ge b$. Define
+
+  \begin{zz}
+    S = \scomp{n \in \N}{a < nb}
+  \end{zz}
+
+  We have $a + 1 \in S$, because $1 \le b$, which implies
+
+  \begin{zz}
+    a < a + 1 \le (a + 1)b
+  \end{zz}
+
+  Therefore, $S \ne \nil$. By the well-ordering
+  principle \parenref{well-ordering}, $S$ contains a smallest element
+  $s_0$ such that $a < s_0b$. Therefore, we have
+
+  \begin{zz}
+    a \ge \parens{s_0 - 1} b
+  \end{zz}
+
+  Let's define $q = s_0 - 1$, $r = a - qb$. We have that $a < (q +
+  1)b$, which implies $a < (qb + b)$. We have that $r = a - qb$ (and,
+  by extension $r < b$). Therefore, we have $a \ge qb$, and $r = (a -
+  qb) \ge 0$.
+\end{definition}
+
+Intuitively, we can construct the interval $\clopint{qb, (q + 1)
+  b}$. We have that $a$ is somewhere in the interval.
+
+\begin{lemma}[Division with remainder]
+  For $a, b \in \Z$, with $b \ne 0$. There exist unique $q, r \in \Z$
+  such that $a = qb + r$, with $0 \le r < \abs{b}$.
+
+  \begin{rcl}
+    \frac{a}{b} & = & q + \frac{r}{b} \\
+    a & = & qb + r \\
+  \end{rcl}
+\end{lemma}
+\begin{proof}
+  This can be proved by case analysis.
+
+  \begin{description}
+  \item[Case $a, b > 0$] What happens if $b > a$? Put $q = 0$, $r =
+    a$, $a = 0\cdot b + a$.
+  \item[Case $b < 0 < a$] $a = q(-b)$
+  \item[Case $a < 0 < b$] \dots
+  \item[Case $a, b < 0$] \dots
+  \end{description}
+
+  I couldn't write fast enough to keep up with the notes in class. So,
+  my notebook just has an ellipsis in it.
+\end{proof}
+
+\begin{example}
+  Let's divide $541$ by $130$.
+
+  \begin{zz}
+    541 = 4 \cdot 130 + 21
+  \end{zz}
+
+  In this case, we have $a = 541$, $b = 130$, $q = 4$, and $r = 21$.
+\end{example}
+
+\subsection{Divisibility}
+
+For $b > 0$,
+
+\begin{definition}
+ The floor of $x$, denoted $\floor{x}$, is the greatest integer less
+ than or equal to $x$.
+\end{definition}
+
+\begin{definition}
+  $a \mod b$ is the remainder of dividing $a$ by $b$
+\end{definition}
+
+\begin{definition}
+  All of the following are equivalent:
+
+  \begin{enumerate}
+  \item $b$ divides $a$, written $b \div a$
+  \item $b$ is a divisor of $a$.
+  \item $b$ is a factor of $a$.
+  \item $a$ is a multiple of $b$
+  \item If $b \ne 0$, then there exists $n \in \Z$ such that $a = bn$
+  \item $a = qb + r$ with $r = 0$
+  \item $\frac{a}{b} \in \Z$.
+  \end{enumerate}
+\end{definition}
+
+\begin{example}
+  We have $3 \div 39$.
+
+  \begin{rcl}
+    39 & = & 3 \cdot 13 \\
+    39 & = & 13 \cdot 3 + 0 \\
+    \frac{39}{3} & \in & \Z \\
+  \end{rcl}
+\end{example}
+
+\begin{remark}
+  In general, writing things additively and/or multiplicatively is
+  better than writing things with division.
+\end{remark}
+
+\begin{lemma}
+  $a \div 0$ for all $a \in \Z \setminus \mset{0}$.
+\end{lemma}
+\begin{proof}
+  $0 = a \cdot 0$
+\end{proof}
+
+\begin{lemma}
+  $0 \nmid a$, for all $a \in \Z$
+\end{lemma}
+\begin{proof}
+  By definition.
+\end{proof}
+
+\begin{lemma}
+  $1 \div a$ for all $a \in \Z$
+\end{lemma}
+\begin{proof}
+  $a = 1 \cdot a$
+\end{proof}
+
+\begin{lemma}
+  $a \div a$ for all $a \in \Z$
+\end{lemma}
+\begin{proof}
+  $a = a \cdot 1$
+\end{proof}
+
+\begin{lemma}
+  $b \div a$ iff $-b \div a$ iff $b \div -a$ iff $-b \div -a$
+\end{lemma}
+\begin{proof}
+  \begin{rclmath}
+    a & = & bn \\
+      & = & (-b)(-n) \\
+    (-a) & = & b(-n) \\
+         & = & (-b)n \\
+  \end{rclmath}
+\end{proof}
+
+\begin{proposition}
+  $a \div b$ and $b \div c$ implies $a \div c$
+\end{proposition}
+\begin{proof}
+  If $a \div b$, then $b = am$, for some $m \in \Z$. $c = mb = m(na) =
+  (mn)a$. Therefore, $a \div c$
+\end{proof}
+
+\begin{proposition}
+  $a \div b$, with $b \ne 0$ implies $\abs{a} \le \abs{b}$.
+
+  \begin{proof}
+    $a \div b$ implies $b = an$, for some $n \in Z$. $b \ne 0$ implies
+    $n \ne 0$. $\abs{b} = \abs{a}\abs{n} \ge \abs{a}\cdot 1$, because
+    $n \in \Z$.
+  \end{proof}
+\end{proposition}
+
+\subsection{Divisors}
+
+\begin{definition}
+  The \term{divisors} of an integer $a$ are the set of integers $b$
+  such that $b \div a$. That is,
+
+  \begin{zz}
+    \scomp{b \in \Z}{b \div a}
+  \end{zz}
+\end{definition}
+
+\begin{remark}
+  ``The divisors'' will almost always refer to the positive divisors.
+\end{remark}
+
+\begin{example}
+  The divisors of $30$ are $\mset{1,2,3,4,6,10,15}$
+\end{example}
+
+\begin{example}
+  The divisors of $42$ are $\mset{1,2,3,6,7,14,21}$
+\end{example}
+
+\begin{remark}
+  If $a = bn$, then both $b$ and $n$ are divisors of $a$.
+\end{remark}
+
+\begin{definition}
+  The \term{common divisors} of two nonzero integers $a$ and $b$ are
+  the numbers that divide both $a$ and $b$.
+\end{definition}
+
+\begin{example}
+  The common divisors of $30$ and $42$ are $\mset{1,2,3,6}$.
+\end{example}
+
+\begin{definition}
+  \label{def:gcd}
+  The \term{greatest common divisor} of two nonzero integers $a$ and
+  $b$ is the largest integer that divides both $a$ and $b$. That is,
+
+  \begin{zz}
+    \gcdp{a,b} = \max \scomp{d \in \Z}{d \div a \land d \div b}
+  \end{zz}
+
+  Equivalently, 
+
+  \begin{itemize}
+  \item $\gcdp{a,b} \div a$
+  \item $\gcdp{a,b} \div b$
+  \item $n \div a$ and $n \div b$ implies $n \le \gcdp{a, b}$
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A \term{linear combination} of $a$ and $b$ is an integer $L \in \Z$
+  such that $ax + by = L$, where $x, y \in \Z$
+\end{definition}
+
+\begin{lemma}
+  \label{thm:common-div-linear-combo}
+  \label{thm:linear-combo-divisors}
+  Any common divisor of $a$ and $b$ is a divisor of any linear
+  combination thereof.
+\end{lemma}
+\begin{proof}
+  Let $L = ax + by$ be a linear combination of $a$ and $b$. We have
+  that $d \div a$, and therefore $a = dm$. We also have $d \div b$,
+  and therefore $b = dn$. Therefore,
+
+  \begin{rcl}
+    L & = & (dm)x + (dn)y \\
+      & = & d (mx + ny) \\
+  \end{rcl}
+
+  Therefore, $d \div L$.
+\end{proof}
+
+\begin{corollary}
+  Given $a = qb + r$, $\gcdp{a,b} = \gcdp{b,r}$.
+\end{corollary}
+\begin{proof}
+  $a = qb + r$ is a linear combination of $b$ and $r$. By
+  \cref{thm:linear-combo-divisors}, all common divisors of $b$ and $r$
+  also divide $a$.
+
+  We also have $r = a - qb$, which implies that any common divisor of
+  $a$ and $b$ is also a divisor of $r$.  This implies
+
+  \begin{zz}
+    \scomp{d \in \Z}{d \div a \land d \div b} = \scomp{d \in \Z}{d
+      \div b \land d \div r}
+  \end{zz}
+
+  Because the two sets are equal, their maximum elements are
+  equal. Therefore,
+
+  \begin{zz}
+    \gcdp{a,b} = \gcdp{b,r}
+  \end{zz}
+
+  QED.
+\end{proof}
+
+\begin{example}
+  \label{ex:divisors-linear-combos}
+  Remember from before,
+
+  \begin{zz}
+    42 = 1 \cdot 30 + 12
+  \end{zz}
+
+  The divisors of $42$ are
+
+  \begin{zz}
+    \mset{1,2,3,6,7,14,21,42}
+  \end{zz}
+
+  The divisors of $30$ are
+
+  \begin{zz}
+    \mset{1,2,3,5,6,12,30}
+  \end{zz}
+
+  The divisors of $r = 12$ are
+
+  \begin{zz}
+    \mset{1,2,3,6,12}
+  \end{zz}
+
+  The common divisors of all three are $\mset{1,2,3,6}$. Their
+  greatest common divisor is $6$.
+
+  We can write
+
+  \begin{alignmath}{rcccl}
+    42 & = & 1 \cdot 30 & + & 12 \\
+    30 & = & 2 \cdot 12 & + & 6 \\
+    12 & = & 2 \cdot 6 & + & 0 \\
+  \end{alignmath}
+
+  Therefore, $6 \div 12$, $6 \div 30$, and $6 \div 42$.
+\end{example}

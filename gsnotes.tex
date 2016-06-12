@@ -1,7 +1,9 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
+\usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{appendix}
+\usepackage{centernot}
 \usepackage[urldate=iso8601,date=iso8601]{biblatex}
 \usepackage[yyyymmdd]{datetime}
 \usepackage{enumitem}
@@ -12,7 +14,7 @@
 \usepackage[hidelinks]{hyperref}
 \usepackage{cleveref}
 
-% \chapterstyle{section}
+\chapterstyle{thatcher}
 \setlength{\parskip}{2ex}
 \renewcommand*{\dateseparator}{-}
 
@@ -28,6 +30,7 @@
 \newcommand{\parens}[1]{\left( #1 \right)}
 \newcommand{\brackets}[1]{\left[ #1 \right]}
 \newcommand{\braces}[1]{\left\{ #1 \right\}}
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\norm}[1]{\left\| #1 \right\|}
 \newcommand{\magnitude}{\norm}
@@ -57,10 +60,10 @@
 \newcommand{\sem}{;\;}
 \newcommand{\parenref}[1]{(\cref{#1})}
 \newcommand{\Parenref}[1]{(\Cref{#1})}
-\newcommand{\namedexercise}[2]
-  {\begin{exercise}[#1]
-    #2
-  \end{exercise}}
+\renewcommand{\div}{\mid}
+\newcommand{\ndiv}{\nmid}
+\newcommand{\gcdp}[1]{\fun{\gcd}{#1}}
+% \renewcommand{\land}{\text{ and }}
 
 \newenvironment{exerciselist}
   {\subsection*{Exercises}}
@@ -68,9 +71,9 @@
 \newenvironment{eqn}
   {\begin{equation*}}
   {\end{equation*}}
-% \newenvironment{alignmath}[1]
-%   {\begin{eqn}\begin{tabu}{#1}}
-%   {\end{tabu}\end{eqn}}
+\newenvironment{alignmath}[1]
+  {\begin{eqn}\begin{tabu}{#1}}
+  {\end{tabu}\end{eqn}}
 \newenvironment{rclmath}
   {\begin{eqnarray*}}
   {\end{eqnarray*}}
@@ -88,12 +91,13 @@
 \newtheorem{remark}[definition]{Remark}
 \newtheorem{aside}[definition]{Aside}
 
-\newtheorem{exercise}{Exercise}[section]
+\newtheorem{exercise}{Exercise}[chapter]
 
 \theoremstyle{plain}
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem{lemma}[definition]{Lemma}
 \newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
 
 
 \addbibresource{gsnotes.bib}

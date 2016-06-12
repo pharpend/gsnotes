@@ -9,3 +9,221 @@ First, we're going to go over some basics, starting with some
 inductive proofs about properties of the natural numbers.
 
 \input{chapters/1/1.tex}
+\input{chapters/1/2.tex}
+\input{chapters/1/3.tex}
+\input{chapters/1/4.tex}
+
+\section*{Exercises}
+
+\subsection*{Induction}
+
+\begin{exercise}
+  \label{exc:strong-weak}
+  Prove that strong induction \parenref{def:strong-induction}
+  implies weak induction \parenref{def:weak-induction}.
+\end{exercise}
+
+\begin{exercise}
+  \label{exc:well-ordering}
+  Prove that the well-ordering
+  principle \parenref{def:well-ordering} is equivalent to
+  mathematical induction \parenref{def:strong-induction}.
+\end{exercise}
+
+\exercise{Prove \cref{thm:n-positive-ints} without induction.}
+
+\begin{exercise}
+  \label{exc:fermat}
+  Using induction, prove that, for all natural numbers $n > 2$,
+  there are no integer solutions to
+
+  \begin{zz}
+    x^n + y^n = z^n
+  \end{zz}
+\end{exercise}
+
+\subsubsection*{Aaron's Induction Exercises}
+
+\begin{exercise}
+  \label{aaron-induction-1}
+  Using induction, prove each of the following
+
+  \begin{enumerate}[label=(\alph*)]
+  \item For $n \ge 1$, the sum of the first $n$ positive integers is
+    equal to $\frac{n(n + 1)}{2}$. That is,
+
+    \begin{zz}
+      1 + 2 + 3 + \dots + n = \frac{n(n + 1)}{2}
+    \end{zz}
+  \item For $n \ge 1$, sum of the first $n$ perfect squares is equal
+    to $\frac{n(n + 1)(2n + 1)}{6}$. That is,
+
+    \begin{zz}
+      1^2 + 2^2 + 3^2 + \dots + n^2 = \frac{n (n + 1)(2n + 1)}{6}
+    \end{zz}
+  \item Using induction, prove that for $n \ge 1$, the sum of the
+    first $n$ positive cubes is equal to the square of the sum of
+    the first $n$ positive integers. That is,
+
+    \begin{zz}
+      1^3 + 2^3 + 3^3 + \dots + n^3 = \parens{1 + 2 + 3 + \dots + n}^2
+    \end{zz}
+
+    Hint: use part (a).
+  \item Fix a real number $x \ge -1$. For any $n \ge 1$,
+
+    \begin{zz}
+      (1 + x)^n \ge 1 + nx
+    \end{zz}
+
+  \item For $n \ge 1$,
+
+    \begin{zz}
+      1(2) + 2(3) + 3(4) + \dots + n(n + 1) = \frac{n(n+1)(n+2)}{3}
+    \end{zz}
+  \item For $n \ge -1$, the integer $2n^3 + 7n$ is divisible by $3$.
+  \item For $n \ge 1$, the integer $n^2 + (n + 2)^2 + (n + 4)^2$ is
+    divisible by $12$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Compute the first several values of the following sequences, and
+  look for a pattern. Guess the formula for the $n$th term. Prove your
+  guess is correct using induction.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item $a_n = \sum_{k = 1}^n 2^{-k}$
+  \item $b_n = \sum_{k = 1}^n \frac{1}{k(k + 1)}$
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  The Fibonacci sequence $F_n$ is defined recursively by
+
+  \begin{rcl}
+    F_0 & = & 0 \\
+    F_1 & = & 1 \\
+    F_n & = & F_{n - 1} + F_{n - 2} \\
+  \end{rcl}
+
+  \begin{enumerate}[label=(\alph*)]
+  \item Calculate $F_n$ for $2 \le n \le 15$.
+  \end{enumerate}
+
+  Use induction to prove the following statements
+
+  \begin{enumerate}[label=(\alph*),start=2]
+  \item For $n \ge 0$,
+
+    \begin{zz}
+      F_1 + F_2 + F_3 + \dots + F_n = F_{n + 2} - 1
+    \end{zz}
+
+  \item For $n \ge 1$,
+
+    \begin{zz}
+      F_1 + F_3 + F_5 + \dots + F_{2n - 1} = F_{2n}
+    \end{zz}
+
+  \item for $n \ge 1$,
+
+    \begin{zz}
+      F_2 + F_4 + F_6 + \dots + F_{2n} = F_{2n + 1} - 1
+    \end{zz}
+
+  \item Use induction to prove that for $n \ge 0$,
+
+    \begin{zz}
+      \parens{F_{n + 1}}^2 - F_nF_{n + 2} = (-1)^n
+    \end{zz}
+    
+  \end{enumerate}
+\end{exercise}
+
+\subsection*{Division}
+
+\subsubsection*{Aaron's Divisibility exercises}
+
+\begin{exercise}
+  Prove the following statements about the integers $a, b, c, d$
+
+  \begin{enumerate}[label=(\alph*)]
+  \item If $a \div 1$, then $a = \pm 1$.
+  \item If $a \div b$, and $b \div a$, then $a = \pm b$
+  \item If $a \div b$, and $c \div d$, then $ab \div cd$
+  \item If $a \div b$, and $a \div c$, then $a^2 \div bc$
+  \item If $a \div b$, and $c \ne 0$, then $ac \div bc$
+  \item If $ac \div bc$, and $c \ne 0$, then $a \div b$
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Disprove the following statements about positive integers $a$, $b$,
+  and $c$ by finding explicit counterexamples:
+
+  \begin{enumerate}[label=(\alph*)]
+  \item If $a \div (b + c)$, then $a \div b$ and $a \div c$.
+  \item If $a \div bc$, then $a \div b$ or $a \div c$.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Prove the following statements
+
+  \begin{enumerate}[label=(\alph*)]
+  \item For any integer $n$, exactly one of $n$, $n + 2$, or $n + 4$
+    is divisible by $3$
+  \item For any integer $n$, the integer $2n^3 + 7n$ is divisible by
+    $3$.
+  \item The square of any even integer is divisible by $4$.
+  \item The square of any odd integer is of the form $8n + 1$.
+  \item For any odd integer $n$, the integer
+    $n^2 + (n + 2)^2 + (n + 4)^2 + 1$ is divisible by $12$.
+  \item For any integer $n$, the integer $(n + 1)^3 - n^3$ is odd.
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \label{exc:gcds}
+  Use the Euclidean algorithm to find the greatest common divisors
+  below.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item $\gcdp{339, 82}$
+  \item $\gcdp{8415, 1078}$
+  \item $\gcdp{1989, 1881}$
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \label{exc:cfs}
+  Use the continued fraction algorithm to write the following rational
+  numbers as continued fractions. Then, compute the second-to-last
+  convergent of the continued fraction.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item $\frac{339}{82}$
+  \item $\frac{8415}{1078}$
+  \item $\frac{1989}{1881}$
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  \label{exc:intsolutions}
+  Use the Euclidean algorithm output from \cref{exc:gcds} to find
+  integer solutions to the following equations. Compare these
+  solutions to the second-to-last convergents calculated in
+  \cref{exc:cfs}.
+
+  \begin{enumerate}[label=(\alph*)]
+  \item $339x + 82y = \gcdp{339, 82}$
+  \item $8415x + 1078y = \gcdp{8415, 1078}$
+  \item $1989x + 1881y = \gcdp{1989, 1881}$
+  \end{enumerate}
+\end{exercise}
+
+\begin{exercise}
+  Find \xtb{all} integer solutions to the equations in
+  \cref{exc:intsolutions}.
+\end{exercise}
