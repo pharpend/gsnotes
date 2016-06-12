@@ -1,0 +1,108 @@
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{appendix}
+\usepackage[urldate=iso8601,date=iso8601]{biblatex}
+\usepackage[yyyymmdd]{datetime}
+\usepackage[answerdelayed]{exercise}
+\usepackage{listings}
+\usepackage{url}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+
+\chapterstyle{bianchi}
+\setlength{\parskip}{2ex}
+\renewcommand*{\dateseparator}{-}
+\crefname{Exercise}{exercise}{exercise}
+\Crefname{Exercise}{exercise}{Exercise}
+
+\newcommand{\monospace}[1]{{\small \path{#1}}}
+\newcommand{\btrurl}[1]{{\small \url{#1}}}
+\newcommand{\barelink}[1]{\monospace{<}\btrurl{#1}\monospace{>}}
+\newcommand{\link}[2]{#1 \barelink{#2}}
+\newcommand{\mdlink}[2]{\href{#2}{#1}}
+\newcommand{\anauthor}[2]{#1 \monospace{<{#2}>}}
+\newcommand{\xtb}{\textbf}
+\newcommand{\xti}{\emph}
+\newcommand{\term}{\textbf}
+\newcommand{\parens}[1]{\left( #1 \right)}
+\newcommand{\brackets}[1]{\left[ #1 \right]}
+\newcommand{\braces}[1]{\left\{ #1 \right\}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\norm}[1]{\left\| #1 \right\|}
+\newcommand{\magnitude}{\norm}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\nil}{\varnothing}
+\newcommand{\mset}[1]{\braces{\, #1 \,}}
+\newcommand{\mvect}[1]{\parens{\, #1 \,}}
+\newcommand{\scomp}[2]{\mset{ #1 \, : \, #2 }}
+\newcommand{\subeq}{\subseteq}
+\newcommand{\subof}{\subsetneq}
+\renewcommand{\epsilon}{\varepsilon}
+\newcommand{\fun}[2]{#1\parens{#2}}
+\renewcommand{\bar}{\overline}
+\newcommand{\openball}[2]{\fun{B_{#1}}{#2}}
+\newcommand{\closedball}[2]{\fun{\bar{B}_{#1}}{#2}}
+\newcommand{\opint}{\parens}
+\newcommand{\clint}{\brackets}
+\newcommand{\opclint}[1]{\left({#1}\right]}
+\newcommand{\clopint}[1]{\left[{#1}\right)}
+\newcommand{\goesto}{\leadsto}
+\newcommand{\limitis}{\leadsto}
+\newcommand{\answergraph}[1]{\includegraphics[width=0.8\textwidth]{#1}}
+
+\newenvironment{alignmath}[1]
+  {\begin{eqn}\begin{tabu}{#1}}
+  {\end{tabu}\end{eqn}}
+\newenvironment{rclmath}
+  {\begin{eqnarray}}
+  {\end{eqnarray}}
+\newenvironment{rcl}
+  {\begin{rclmath}}
+  {\end{rclmath}}
+\newenvironment{eqn}
+  {\begin{equation}}
+  {\end{equation}}
+% Named so that I don't accidentally select the wrong completion.
+\newenvironment{zz}
+  {\begin{eqn}}
+  {\end{eqn}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\newtheorem{remark}[definition]{Remark}
+\newtheorem{aside}[definition]{Aside}
+
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{corollary}[definition]{Corollary}
+
+
+\addbibresource{gsnotes.bib}
+\nocite{*}
+
+\begin{document}
+\title{Number Theory notes}
+% Can't use \monospace here because texlive is being fussy
+\author{Peter Harpending \texttt{<peter.harpending@utah.edu>}}
+\maketitle
+\tableofcontents
+
+\setcounter{chapter}{-1}
+\input{chapters/0.tex}
+\input{chapters/1.tex}
+
+\begin{appendices}
+  \chapter{Solutions to some of the exercises}
+
+  \shipoutAnswer
+\end{appendices}
+
+\printbibliography
+\end{document}

@@ -1,0 +1,113 @@
+\section{Induction}
+
+There are 5 axioms, called the \term{Peano axioms}\footnote{``Peano''
+  is pronounced ``pay ahh no''.}, which we can use to define most
+properties of the natural numbers.
+
+\begin{aside}
+  There are loads of textbooks that prove very basic properties of the
+  natural numbers using the Peano axioms. Such properties include
+  things like
+
+  \begin{enumerate}
+  \item for all natural numbers $a, b, c$
+
+    \begin{zz}
+      a + (b + c) = (a + b) + c
+    \end{zz}
+  \end{enumerate}
+
+  It's not very interesting, but it's great practice if you aren't
+  used to proofs. If you are interested in the topic, I would
+  recommend Edmund Landau's \xti{Foundations of Analysis}
+  \cite{landau}, right after you visit your local mental hospital.
+\end{aside}
+
+\begin{definition}[Strong induction]
+  \label{def:strong-induction}
+  If there is a set $A$ such that
+    \begin{itemize}
+    \item $1 \in A$,
+    \item for every $n$, $\mset{1, 2, \dots, n} \subeq A$ implies
+      $S(n) \in A$,
+    \end{itemize}
+
+    then every natural number is in $A$.
+\end{definition}
+
+The last axiom is called ``strong induction''. There is a weaker, more
+common version of the axiom, called ``weak induction''.
+
+\begin{definition}[Weak induction]
+  \label{def:weak-induction}
+  If there is a set $A$ such that
+
+  \begin{itemize}
+  \item $1 \in A$
+  \item $n \in A$ implies $S(n) \in A$
+  \end{itemize}
+
+  then every natural number $n$ is in $A$.
+\end{definition}
+
+Weak induction can be proven from strong induction
+(\cref{exc:strong-weak}).\footnote{Generally, the terms ``strong X''
+  and ``weak X'' mean that ``weak X'' can be proven from ``strong
+  X''.} The concept is usually called \term{mathematical induction},
+or just \term{induction}. In general, we apply this in proofs by
+having some function $P$, which takes a natural number, and decides if
+a given proposition is true or not. If $\scomp{n \in \N}{P(n)}$
+satisfies the induction axiom, then we conclude $P(n)$ holds for all
+$n$.
+
+\begin{aside}
+  Some logic systems don't have the dichotomy of ``true'' or
+  ``false'', also called the \term{law of excluded middle}, which
+  makes my explanation of induction somewhat reductionist.  If you are
+  interested in the topic, check out \link{John Halleck's Logic
+    Systems}{http://www.cc.utah.edu/~nahaj/logic/structures/systems/index.html}. \cite{halleck}
+\end{aside}
+
+\begin{definition}[Well-ordering principle]
+  Every non-empty subset of the natural numbers has a least element.
+\end{definition}
+
+\begin{remark}
+  The well-ordering principle is equivalent to the principle of
+  mathematical induction (\cref{exc:well-ordering}).
+\end{remark}
+
+\begin{lemma}
+  The sum of the first $n$ positive integers is equal to $n^2$. That
+  is,
+
+  \begin{zz}
+    n^2 = \sum_{i = 1}^n i
+  \end{zz}
+
+  Let's define $S$ to be the set of all natural numbers for which
+  $P(n)$ does not hold.
+\end{lemma}
+
+% -------------------------------------------------------------------- %
+\subsection*{Exercises}
+
+\begin{ExerciseList}
+  \Exercise{Prove that strong induction (\cref{def:strong-induction})
+    implies weak induction (\cref{def:weak-induction}).}
+  \label{exc:strong-weak}
+
+  \Exercise{Using induction, prove that, for all natural numbers
+    $n > 2$, there are no integer solutions to
+
+    \begin{zz}
+      x^n + y^n = z^n
+    \end{zz}
+  }
+  \label{exc:fermat}
+
+  \Exercise{Prove that the well-ordering principle
+    (\cref{def:well-ordering}) is equivalent to mathematical
+    induction.}
+  \label{exc:well-ordering}
+\end{ExerciseList}

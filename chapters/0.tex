@@ -1,0 +1,126 @@
+\chapter{Introduction}
+
+This is a collection of my notes, as well as elaborations on things
+that confused me.
+
+If you're reading this in a PDF reader, you can click on references,
+and your PDF reader will take you to the appropriate place. Examples
+are
+
+\begin{itemize}
+\item Citations: \cite{savin}
+\item Footnotes\footnote{Hello}
+\item References to other content, like \cref{ch:euclid}.
+\item URLs, like \link{the course
+    website}{http://www.math.utah.edu/~wood/4400}.
+\end{itemize}
+
+If you notice any errors, please email
+\path{<peter.harpending@utah.edu>}.
+
+This class assumes you know what proofs, sets, set comprehensions, and
+propositions are.
+
+\section{What is Number Theory?}
+
+Number theory is the study of the \term{natural numbers}, usually
+abbreviated as $\N$.
+
+\begin{zz}
+  \N = \mset{0,1,2,3,4,\dots}
+\end{zz}
+
+However, that quickly becomes rather limiting. So, we also study the
+following sets:
+
+\begin{enumerate}
+\item The \term{integers}, usually denoted with a pretentious
+  $\Z$. The `z' is short for ``zahlen'', which means ``numbers'' in
+  German. \cite{w-integers}
+
+  \begin{zz}
+    \Z = \mset{\dots, -4, -3, -2, -1, 0, 1, 2, 3, 4, \dots}
+  \end{zz}
+\item The \term{rational numbers}, also called the \term{quotient
+    numbers}, usually denoted with $\Q$.
+
+  \begin{zz}
+    \Q = \scomp{\frac{m}{n} \in \R}{m, n \in \Z;\; n \ne 0}
+  \end{zz}
+
+  The `q' stands for ``quotient''. ``Rational'', in this context,
+  means ``can be expressed as a ratio'', not ``reasonable''. That
+  said, the set of real numbers that are \xti{not} rational are called
+  the ``irrational numbers''. Moreover, as we'll see, the rational
+  numbers are considerably more reasonable than the irrational
+  numbers.
+\item We're subtly assuming (not entirely unreasonably) that you know
+  what real numbers are. They are very difficult to define in a way
+  that is not problematic. The real numbers are denoted $\R$. 
+\item Finally, we have the \term{complex numbers}. These are numbers
+  with two units, one of which is $i = \sqrt{-1}$.
+
+  \begin{zz}
+    \C = \scomp{a + bi}{a, b \in \R}
+  \end{zz}
+\end{enumerate}
+
+\begin{aside}[Uniqueness of real numbers]
+  You might be tempted to define
+
+  \begin{zz}
+    \R = \scomp{z + \sum_{p = 1}^{\infty} a_p \times 10^{-p}}{a_p \in
+      \N, z \in \Z}
+  \end{zz}
+
+  This is a silly formal way of writing something like
+  $-14.20487172\dots$ (an irrational number with infinite digits). The
+  integer part, $z$, is $-14$. Then $a = \mset{2,0,4,8,7,\dots}$. In
+  the summation notation, this would be
+
+  \begin{zz}
+    -14 + \parens{2 \times 10^{-1}} + \parens{0 \times 10^{-2}} +
+    \dots
+  \end{zz}
+
+  which is equivalent to
+
+  \begin{zz}
+    -14 + 0.2 + 0.00 + 0.004 + 0.0008 + \dots
+  \end{zz}
+
+  The problem is when we have a number like
+
+  \begin{zz}
+    n = 0.99999\dots
+  \end{zz}
+
+  From the series definition, this is convergent to $1$, because for
+  any $\epsilon > 0$, there is always an $n \in \N$ such that
+
+  \begin{zz}
+    \abs{1 - \sum_{p = 1}^{n} a_p \times 10^{-p}} < \epsilon
+  \end{zz}
+
+  In layman's terms, this means that, for any real number $\epsilon$,
+  if we have a sufficient number of digits, we can get close enough to
+  $1$ such that the difference between $1$ and $0.999\dots$ (with $n$
+  digits) is less than $\epsilon$. This is the exact definition of
+  convergence of an infinite series. \cite{taylor}
+
+  There's a much more elegant---but harder to typeset---proof of this
+  on \link{Peter Alfeld's
+    site}{http://www.math.utah.edu/~pa/math/sets/unique.html}. \cite{pa-unique}
+
+  The problem here is that \xtb{decimal representations of real
+    numbers are not unique}, meaning that we can write down two
+  different numbers that converge to the same number.
+
+  That particular problem probably won't come up in our class too
+  often. It is worth mentioning, though.
+
+  The most common non-problematic method of defining real numbers is
+  to use \term{Dedekind cuts}. If you would like to learn more about
+  this, I suggest reading Edmund Landau's \xti{Foundations of
+    Analysis}. \cite{landau}
+\end{aside}
