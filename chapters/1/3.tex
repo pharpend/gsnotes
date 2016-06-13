@@ -1,47 +1,100 @@
-\section{Euclidean Algorithm}
+\section{Bezout's lemma}
 
-The \term{Euclidean algorithm} is a fast method for finding the
-greatest common divisor of two numbers. We purposefully stumbled upon
-it in \cref{ex:divisors-linear-combos}. Choose positive integers
-$a, b$
+Savin calls this the ``Fundamental Theorem of Arithmetic''. That name
+is typically used to refer to another theorem, so we'll use ``Bezout's
+lemma'' for now. We'll use it in the future to prove the uniqueness of
+factorization.
 
-\begin{alignmath}{rclcrcl}
-  a & = & q_1b + r_1 & \text{where} & 0 \le r_1 < b \\
-  b & = & q_2r_1 + r_2 & \text{where} & 0 \le r_2 < r_1 \\
-  r_1 & = & q_3r_2 + r_3 & \text{where} & 0 \le r_3 < r_2 \\
-  r_2 & = & q_4r_3 + r_4 & \text{where} & 0 \le r_4 < r_3 \\
-      &   &              & \dots \\
-  r_{n - 2} & = & q_n r_{n - 1} + r_n & \text{where} & 0 \le r_n < r_{n - 1} \\
-  r_{n - 1} & = & q_{n + 1}r_n + 0
-\end{alignmath}
+\begin{lemma}[Bezout's lemma]
+  \label{bezout}
+  For any $a, b \in \Z$, there exist $x, y \in \Z$ such that
 
-The last nonzero remainder, $r_n$, is the greatest common divisor.
-The fact that the algorithm terminates follows from the fact that the
-set $b > r_1 > r_2 > \dots > r_n$ must have a least element (by the
-well-ordering principle), which implies $r_{n + 1} = 0$.
+  \begin{zz}
+    ax + by = \gcdp{a,b}
+  \end{zz}
+\end{lemma}
+
+There are two proofs.
+
+\begin{proof}[Existence proof]
+  In the case where $a$ is zero, we note that
+  $0 \cdot x + b \cdot 1 = b = \gcdp{0, b}$, for all $x \in \Z$. An
+  analogous argument applies when $b = 0$, or when both $a$ and $b$
+  are zero.
+
+  In the case where both $a$ and $b$, are nonzero, let $L$ be the set
+  of integer linear combinations of $a$ and $b$. That is,
+
+  \begin{zz}
+    L = \scomp{ax + by \in \Z}{x,y \in \Z}
+  \end{zz}
+
+  To get the positive integer linear combinations, we intersect $L$
+  with $\N$ to get
+
+  \begin{zz}
+    L \cap \N = \scomp{ax + by \in \N}{x,y \in \Z}
+  \end{zz}
+
+  This set is nonempty, because it contains both $\abs{a}$ and
+  $\abs{b}$ as elements. Define $\ell_0 = \fun{\min}{L \cap \N}$. By
+  the well-ordering principle \parenref{well-ordering}, there exists
+  $x_0, y_0 \in \Z$ such that
+
+  \begin{zz}
+    \ell_0 = ax_0 + by_0
+  \end{zz}
+
+  We want to prove that $\ell_0$ is the greatest common divisor. We'll
+  abbreviate $\gcdp{a,b} = d$ from now on.
+
+  \begin{enumerate}
+  \item We have $\ell_0$ is a linear combination of $a$ and $b$. Any
+    common divisor of $a$ and $b$ divides any linear combination
+    thereof \parenref{linear-combo-divisors}. Therefore, $d$ divides
+    $\ell_0$, which implies $d \le \ell_0$.
+  \item Going to use the division algorithm to write $q = a\ell_0 +
+    r$.
+
+    \begin{rcl}
+      r & = & a - q\ell_0 \\
+        & = & a - q\parens{ax_0 + by_0} \\
+        & = & a\parens{1 - qx_0} + b\parens{qy_0} \\
+    \end{rcl}
+
+    This is a linear combination of $a$ and $b$, which puts $r \in
+    L$. We have by definition of the division algorithm
+    $0 \le r < \ell_0$, and previously that $\ell_0$ is the smallest
+    positive element in $L$. Therefore $r = 0$. Therefore,
+    $\ell_0 \div a$. A similar argument shows $\ell_0 \div
+    b$. Therefore, $\ell_0$ is a common divisor of $a$ and $b$. We
+    previously had that $d \le \ell_0$, and $d$ is the greatest common
+    divisor. Therefore $\ell_0 = d$.
+  \end{enumerate}
+\end{proof}
+
+This is merely an existence proof. It doesn't give us a way to find
+the linear combinations. We will give such a proof right here.
+
+\begin{proof}[Constructive proof]
+  For simplicity, let's say the Euclidean Algorithm terminates in $4$
+  steps. Therefore,
+
+  \begin{rcl}
+    r_1 & = & a - q_1 b \\
+    r_2 & = & b - q_2 r_1 \\
+    r_3 & = & r_1 - q_3 r_2 \\
+        & = & r_1 - q_3 \parens{b - q_2 r_1} \\
+        & = & r_1 - q_3 \brackets{b - q_2 \parens{a - q_1b}} \\
+        & = & a\parens{\dots} + b\parens{\dots}
+  \end{rcl}
+
+  Therefore, we have $r_3$ as an explicit linear combination of $a$
+  and $b$.
+\end{proof}
 
 \begin{example}
-  Let's use the Euclidean algorithm to find $\gcdp{541,130}$
-
-  \begin{alignmath}{rcrcl}
-    541 & = & 4 \cdot 130 & + & 21 \\
-    130 & = & 6 \cdot 21 & + & 4 \\
-    21 & = & 5 \cdot 4 & + & 1 \\
-    4 & = & 4 \cdot 1 & + & 0 \\
-  \end{alignmath}
-
-  Since $1$ is the last nonzero remainder, it's the greatest common
-  divisor.
-\end{example}
-
-\begin{remark}
-  Aaron was tricky. $541$ is a prime number, which implies its only
-  divisors are $1$ and $541$. Therefore, its greatest common divisor
-  with any number absolutely less than $541$ will obviously be $1$.
-\end{remark}
-
-\begin{example}
-  Let's find $\gcdp{10469,10013}$ using the Euclidean algorithm.
+  Applying the Euclidean algorithm to $10469$ and $10013$, we get
 
   \begin{alignmath}{rcrcl}
     10469 & = & 1 \cdot 10013 & + & 456 \\
@@ -50,19 +103,155 @@ well-ordering principle), which implies $r_{n + 1} = 0$.
     437 & = & 23 \cdot 19 & + & 0 \\
   \end{alignmath}
 
-  Therefore, $\gcdp{10469,10013} = 19$
-\end{example}
-
-\begin{example}
-  Find $\gcdp{2717,2431}$ using the Euclidean algorithm
+  If we rewrite it in our remainder form, we get
 
   \begin{alignmath}{rcrcl}
-    2717 & = & 1 \cdot 2431 & + & 286 \\
-         & \dots &
+    19 & = & 456 & - & 437 \\
+       & = & 456 & - & \parens{10013 - 21\cdot 456} \\
+       & = & -10013 & + & 22 \cdot 456 \\
+       & = & -10013 & + & 22 \cdot (10469 - 10013) \\
+       & = & 22 \cdot 10469 & - & 23 \cdot 10013 \\
+       & \dots & 
   \end{alignmath}
+
+  Therefore, we have a solution for
+  $10469x + 10013y = \gcdp{10469,10013}$.
 \end{example}
 
-\begin{remark}
-  Turns out, worst case, the Euclidean algorithm terminates in
-  $5 \cdot \log_{10} r$ steps.
-\end{remark}
+\begin{lemma}[Euclid's Lemma]
+  \label{euclids-lemma}
+  If $c \div ab$ and $\gcdp{a,c} = 1$, then $c \div b$.
+\end{lemma}
+\begin{proof}
+  We use Bezout's lemma to write $ax + cy = 1$ for some $x, y \in
+  \Z$. We multiply by $b$ to get $abx + bcy = b$. We have $c \div
+  ab$ and (trivially) $c \div bc$. Therefore, $c \div abx + bcy$, if
+  and only if $c \div b$.
+\end{proof}
+
+\begin{lemma}
+  If $r \ne 0$, then $\gcdp{ra,rb} = \abs{r}\gcdp{a,b}$.
+\end{lemma}
+\begin{proof}
+  We simply use Bezout's lemma twice. Put $d = \gcdp{a,b}$, and $D =
+  \gcdp{ra,rb}$. Our goal is to prove $d = rD$. By Bezout's lemma, we
+  have $d = ax + by$. Therefore, $rd = rax + rby$, which is a linear
+  combination of $ra$ and $rb$. By \cref{linear-combo-divisors}, we
+  have $D \div rd$.
+
+  Applying Bezout's lemma again, we get $D = rau + rbv$. Trivially, we
+  have $d \div a \implies rd \div ra$ and $d \div b \implies rd \div
+  rb$. Therefore, $rd$ is a common div of $ra$ and $rb$, which implies
+  $rd \div D$.
+\end{proof}
+
+\begin{definition}
+  Two integers are \term{relatively prime} if their greatest common
+  divisor is $1$.
+\end{definition}
+
+\begin{corollary}
+  If $d = \gcdp{a,b}$, then $\gcdp{\frac{a}{d}, \frac{b}{d}} = 1$.
+\end{corollary}
+
+\begin{aside}
+  A large set of number theory problems are \term{Diophantine
+    equations}. Diophantus was some dude circa approximately 200
+  CE. We want integer solutions to equations like
+
+  \begin{itemize}
+  \item $a^2 + b^2 = c^2$, called \term{Pythagorean triples}, where
+    there are infinitely many
+  \item $a^n + b^n = c^n$ for $n \ge 2$, where there are
+    none \parenref{fermat}.
+  \item $y^2 = x^3 + ax + b$, called \term{Elliptic curves}. These are
+    very difficult to solve, so some cryptography protocols utilize them.
+  \end{itemize}
+\end{aside}
+
+\begin{lemma}
+  If $d = \gcdp{a,b}$, and $d \ndiv c$, then there are no solutions to
+  \begin{zz}
+    ax + by = c
+  \end{zz}
+\end{lemma}
+\begin{proof}
+  If there is a solution, then $c$ is a linear combination of $a$ and
+  $b$, and therefore $d \div c$, a contradiction.
+\end{proof}
+
+\begin{lemma}
+  If $d \div c$, then there is a solution to $ax + by = c$.
+\end{lemma}
+\begin{proof}
+  We use Bezout's lemma to get $ax + by = d$. If $d \div c$, then
+  $c = dn$ for some $n \in \Z$. Therefore, we can write
+  $anx + bny = dn = c$.
+\end{proof}
+
+\begin{lemma}
+  If $\mv{x_0, y_0}$ is a solution to $ax + by = c$, then so is
+  $\mv{x_0 + \frac{b}{d} t, y_0 - \frac{a}{d}t}$ for any $t \in \Z$.
+\end{lemma}
+\begin{proof}
+  Take $a \parens{x_0 + \frac{b}{d}t} + b \parens{y_0 -
+    \frac{a}{d}t}$. This is equal to
+
+  \begin{zz}
+    ax_0 + by_0 + \frac{ab}{d} t - \frac{ba}{d}t
+  \end{zz}
+
+  Which is equal to $c$.
+\end{proof}
+
+\begin{lemma}
+  This accounts for \emph{all} solutions. That is, if $\mv{x_0, y_0}$
+  and $\mv{x_1,y_1}$ are solutions, then there exists $t \in \Z$ such
+  that
+  \begin{rcl}
+    x_1 & = & x_0 + \frac{b}{d} t \\
+    y_1 & = & y_0 - \frac{a}{d} t
+  \end{rcl}
+\end{lemma}
+\begin{proof}
+  We know
+  \begin{rcl}
+    ax_0 + by_0 & = & c \\
+    ax_1 + by_1 & = &   \\
+    a(x_0 - x_1) + b(y_0 - y_1) & = & 0 \\
+    a(x_0 - x_1) & = & b(y_1 - y_0) \\
+    \frac{a}{d}(x_0 - x_1) & = & \frac{b}{d}(y_1 - y_0) \\
+  \end{rcl}
+
+  This is still an equation in $\Z$, which implies $\frac{a}{d} \div
+  \frac{b}{d}\parens{y_1 - y_0}$. With $\gcdp{\frac{a}{d},\frac{b}{d}}
+  = 1$, Euclid's lemma implies $\frac{a}{d} \div \parens{y_1 -
+    y_0}$. Therefore, $y_1 - y_0 = \frac{a}{d}(-t)$ where $-t \in
+  \Z$. Now, we have $y_1 = y_0 - \frac{a}{d} t$, $a\parens{x_0 - x_1}
+  = b\parenfrac{a}{d}(-t)$.
+
+  By the way, I should have mentioned this earlier, we're assuming
+  $a \ne 0$. We cancel the $a$s to get $x_1 = x_0 + \parens{b}{d}t$.
+\end{proof}
+
+\begin{theorem}
+  The equation $ax + by = c$ has a solution $x, y \in \Z$ if and only
+  if $\gcdp{a,b} \div c$. Moreover, if $\mv{x_0, y_0}$is any soluton,
+  then the set
+  \begin{zz}
+    \scomp{\mv{x_0 + \frac{b}{d}t, y_0 - \frac{a}{d}t} \in \Z^2}{t \in \Z}
+  \end{zz}
+  is the set of integer solutions.
+\end{theorem}
+
+We'll prove this later.
+
+\begin{example}[Zhang Quijian's chicken problem]
+  If a rooster is worth five coins, a hen is worth three coins, and
+  one coin is worth three chicks, how can you buy $100$ animals for
+  $100$ coins?
+
+  \begin{solution}
+    
+  \end{solution}
+\end{example}

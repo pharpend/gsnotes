@@ -229,6 +229,7 @@ For $b > 0$,
 \begin{lemma}
   \label{thm:common-div-linear-combo}
   \label{thm:linear-combo-divisors}
+  \label{linear-combo-divisors}
   Any common divisor of $a$ and $b$ is a divisor of any linear
   combination thereof.
 \end{lemma}
@@ -310,3 +311,72 @@ For $b > 0$,
 
   Therefore, $6 \div 12$, $6 \div 30$, and $6 \div 42$.
 \end{example}
+
+\subsection{Euclidean Algorithm}
+
+The \term{Euclidean algorithm} is a fast method for finding the
+greatest common divisor of two numbers. We purposefully stumbled upon
+it in \cref{ex:divisors-linear-combos}. Choose positive integers
+$a, b$
+
+\begin{alignmath}{rclcrcl}
+  a & = & q_1b + r_1 & \text{where} & 0 \le r_1 < b \\
+  b & = & q_2r_1 + r_2 & \text{where} & 0 \le r_2 < r_1 \\
+  r_1 & = & q_3r_2 + r_3 & \text{where} & 0 \le r_3 < r_2 \\
+  r_2 & = & q_4r_3 + r_4 & \text{where} & 0 \le r_4 < r_3 \\
+      &   &              & \dots \\
+  r_{n - 2} & = & q_n r_{n - 1} + r_n & \text{where} & 0 \le r_n < r_{n - 1} \\
+  r_{n - 1} & = & q_{n + 1}r_n + 0
+\end{alignmath}
+
+The last nonzero remainder, $r_n$, is the greatest common divisor.
+The fact that the algorithm terminates follows from the fact that the
+set $b > r_1 > r_2 > \dots > r_n$ must have a least element (by the
+well-ordering principle), which implies $r_{n + 1} = 0$.
+
+\begin{example}
+  Let's use the Euclidean algorithm to find $\gcdp{541,130}$
+
+  \begin{alignmath}{rcrcl}
+    541 & = & 4 \cdot 130 & + & 21 \\
+    130 & = & 6 \cdot 21 & + & 4 \\
+    21 & = & 5 \cdot 4 & + & 1 \\
+    4 & = & 4 \cdot 1 & + & 0 \\
+  \end{alignmath}
+
+  Since $1$ is the last nonzero remainder, it's the greatest common
+  divisor.
+\end{example}
+
+\begin{remark}
+  Aaron was tricky. $541$ is a prime number, which implies its only
+  divisors are $1$ and $541$. Therefore, its greatest common divisor
+  with any number absolutely less than $541$ will obviously be $1$.
+\end{remark}
+
+\begin{example}
+  Let's find $\gcdp{10469,10013}$ using the Euclidean algorithm.
+
+  \begin{alignmath}{rcrcl}
+    10469 & = & 1 \cdot 10013 & + & 456 \\
+    10013 & = & 21 \cdot 456 & + & 437 \\
+    456 & = & 1 \cdot 437 & + & 19 \\
+    437 & = & 23 \cdot 19 & + & 0 \\
+  \end{alignmath}
+
+  Therefore, $\gcdp{10469,10013} = 19$
+\end{example}
+
+\begin{example}
+  Find $\gcdp{2717,2431}$ using the Euclidean algorithm
+
+  \begin{alignmath}{rcrcl}
+    2717 & = & 1 \cdot 2431 & + & 286 \\
+         & \dots &
+  \end{alignmath}
+\end{example}
+
+\begin{remark}
+  Turns out, worst case, the Euclidean algorithm terminates in
+  $5 \cdot \log_{10} r$ steps.
+\end{remark}

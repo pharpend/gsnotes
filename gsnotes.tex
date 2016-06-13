@@ -42,6 +42,7 @@
 \newcommand{\nil}{\varnothing}
 \newcommand{\mset}[1]{\braces{\, #1 \,}}
 \newcommand{\mvect}[1]{\parens{\, #1 \,}}
+\newcommand{\mv}[1]{\parens{\, #1 \,}}
 \newcommand{\scomp}[2]{\mset{ #1 \, : \, #2 }}
 \newcommand{\subeq}{\subseteq}
 \newcommand{\subof}{\subsetneq}
@@ -63,7 +64,7 @@
 \renewcommand{\div}{\mid}
 \newcommand{\ndiv}{\nmid}
 \newcommand{\gcdp}[1]{\fun{\gcd}{#1}}
-% \renewcommand{\land}{\text{ and }}
+\newcommand{\parenfrac}[2]{\parens{\frac{#1}{#2}}}
 
 \newenvironment{exerciselist}
   {\subsection*{Exercises}}
@@ -84,6 +85,9 @@
 \newenvironment{zz}
   {\begin{eqn}}
   {\end{eqn}}
+\newenvironment{solution}
+  {\xtb{Solution: }}
+  {}
 
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
